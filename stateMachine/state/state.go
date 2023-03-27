@@ -1,4 +1,7 @@
-package stateMachine
+package state
+
+// 状态模式允许一个对象在其内部状态改变时改变其行为。
+// 部署任务、应用和资源可以根据状态有不同的行为
 
 type State string
 
@@ -73,7 +76,7 @@ func (dt *DeploymentTask) updateResourceState(appIndex, resIndex int, newState S
 	if dt.applications[appIndex].resources[resIndex].state == Success || dt.applications[appIndex].resources[resIndex].state == Failed {
 		return
 	}
-	
+
 	dt.applications[appIndex].resources[resIndex].state = newState
 	dt.applications[appIndex].updateAppState()
 	dt.updateTaskState()

@@ -1,4 +1,4 @@
-package stateMachine
+package state
 
 import (
 	"fmt"
