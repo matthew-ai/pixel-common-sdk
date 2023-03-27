@@ -38,5 +38,5 @@ func TestDeploymentTask_updateTaskState(t *testing.T) {
 	fmt.Println(task.state) // success
 
 	task.updateResourceState(0, 1, Failed)
-	fmt.Println(task.state) // failed
+	fmt.Println(task.state) // success (不会变为failed，因为任务状态已经是success)
 }

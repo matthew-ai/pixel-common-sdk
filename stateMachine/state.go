@@ -24,6 +24,10 @@ type DeploymentTask struct {
 }
 
 func (dt *DeploymentTask) updateTaskState() {
+	if dt.state == Success || dt.state == Failed {
+		return
+	}
+
 	allAppsSuccess := true
 	for _, app := range dt.applications {
 		if app.state == Failed {
@@ -43,6 +47,10 @@ func (dt *DeploymentTask) updateTaskState() {
 }
 
 func (app *Application) updateAppState() {
+	if app.state == Success || app.state == Failed {
+		return
+	}
+
 	allResourcesSuccess := true
 	for _, res := range app.resources {
 		if res.state == Failed {
@@ -62,6 +70,10 @@ func (app *Application) updateAppState() {
 }
 
 func (dt *DeploymentTask) updateResourceState(appIndex, resIndex int, newState State) {
+	if dt.applications[appIndex].resources[resIndex].state == Success || dt.applications[appIndex].resources[resIndex].state == Failed {
+		return
+	}
+	
 	dt.applications[appIndex].resources[resIndex].state = newState
 	dt.applications[appIndex].updateAppState()
 	dt.updateTaskState()
